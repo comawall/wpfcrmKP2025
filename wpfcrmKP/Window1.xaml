@@ -1,0 +1,83 @@
+﻿<Window x:Class="wpfcrmKP.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CRM для ресторанов 2025" Height="1080" Width="1920"
+        Background="#FF9C6868">
+
+    <Window.Resources>
+        <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="15"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Height="295" Width="208">
+            <Button Content="Добавить" Style="{StaticResource RoundedButton}" Click="AddOrder"/>
+            <Button Content="Удалить" Style="{StaticResource RoundedButton}" Margin="0,30,0,0" Click="DeleteOrder"/>
+            <Button Content="Редактировать" Style="{StaticResource RoundedButton}" Margin="0,30,0,0" Click="EditOrder"/>
+            <Button Content="Статистика" Style="{StaticResource RoundedButton}" Margin="0,30,0,0" Click="ShowStatistics"/>
+        </StackPanel>
+
+        <Border Background="#E5E5E5" CornerRadius="5" BorderBrush="Black" BorderThickness="1"
+                Width="800" Height="700" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="249,145,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="79*"/>
+                    <ColumnDefinition Width="35*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Заказы в работе" FontWeight="Bold" Margin="0,0,10,6" Grid.ColumnSpan="2"/>
+                <DataGrid x:Name="DataGridOrders" AutoGenerateColumns="False" HeadersVisibility="Column" Background="White"
+                          HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black"
+                          BorderThickness="1" BorderBrush="Black" Margin="0,30,0,0" Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ном. зз" Width="100" Binding="{Binding OrderNumber}"/>
+                        <DataGridTextColumn Header="Кол-во поз" Width="150" Binding="{Binding ItemCount}"/>
+                        <DataGridTextColumn Header="Время" Width="150" Binding="{Binding Time}"/>
+                        <DataGridTextColumn Header="Код блюд" Width="150" Binding="{Binding DishCode}"/>
+                        <DataGridTextColumn Header="Способ получения" Width="150" Binding="{Binding PickupMethod}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Content="Переместить в готовые" Style="{StaticResource RoundedButton}" Margin="-226,642,579,6" Click="MoveToCompletedOrders" RenderTransformOrigin="0.528,1.041"/>
+            </Grid>
+        </Border>
+
+        <Border Background="#E5E5E5" CornerRadius="5" BorderBrush="Black" BorderThickness="1"
+                Width="800" Height="700" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,145,44,0">
+            <Grid>
+                <TextBlock Text="Готовые заказы" FontWeight="Bold" Margin="0,0,10,5"/>
+                <DataGrid x:Name="DataGridCompletedOrders" AutoGenerateColumns="False" HeadersVisibility="Column" Background="White"
+                          HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black"
+                          BorderThickness="1" BorderBrush="Black" Margin="0,30,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ном. зз" Width="100" Binding="{Binding OrderNumber}"/>
+                        <DataGridTextColumn Header="Кол-во поз" Width="150" Binding="{Binding ItemCount}"/>
+                        <DataGridTextColumn Header="Время" Width="150" Binding="{Binding Time}"/>
+                        <DataGridTextColumn Header="Код блюд" Width="150" Binding="{Binding DishCode}"/>
+                        <DataGridTextColumn Header="Способ получ" Width="150" Binding="{Binding PickupMethod}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+
+        <TextBlock Text="CRM для ресторанов 2025" FontWeight="Bold" HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom" Margin="0,0,0,20"/>
+    </Grid>
+</Window>
